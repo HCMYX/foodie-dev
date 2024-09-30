@@ -68,4 +68,9 @@ public class UserServiceImpl implements UserService {
         userCriteria.andEqualTo("password",password);
         return usersMapper.selectOneByExample(userExample);
     }
+
+    @Override
+    public Users updateUserInfo(UserBO userBO) {
+        return null;
+    }
 }
