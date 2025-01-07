@@ -1,12 +1,13 @@
 package com.imooc.controller;
 
+import java.io.File;
+
 public class BaseController {
     public static final String FOODIE_SHOPCART = "shopcart";
     public static final Integer COMMON_PAGE_SIZE = 10;
     public static final Integer PAGE_SIZE = 20;
     public static final String paymentUrl = "http://payment.t.mukewang.com/foodie-payment/payment/createMerchantOrder";
     public static final String payReturnUrl = "http:///36uqzp.natappfree.cc/orders/notifyMerchantOrderPaid";
-
 
     public static final String REDIS_USER_TOKEN = "redis_user_token";
     public static final String REDIS_USER_INFO = "redis_user_info";

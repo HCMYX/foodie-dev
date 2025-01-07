@@ -9,6 +9,8 @@ import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.BeanProperty;
 import java.util.Date;
@@ -32,6 +34,17 @@ public class CenterUserServiceImpl implements CenterUserService {
         Users updateUser = new Users();
         BeanUtils.copyProperties(userBO, updateUser);
         updateUser.setId(userId);
+        updateUser.setUpdatedTime(new Date());
+        usersMapper.updateByPrimaryKeySelective(updateUser);
+        return userInfo(userId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Users updateUserFace(String userId, String faceUrl) {
+        Users updateUser = new Users();
+        updateUser.setId(userId);
+        updateUser.setFace(faceUrl);
         updateUser.setUpdatedTime(new Date());
         usersMapper.updateByPrimaryKeySelective(updateUser);
         return userInfo(userId);
