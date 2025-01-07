@@ -16,16 +16,19 @@ spring:
     url: jdbc:mysql://localhost:3306/foodie-shop-dev?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=true&serverTimezone=UTC
     username: root
     password: 123456
-  hikari:
-    connection-timeout: 30000
-    minimum-idle: 5 #最小链接数
-    maximum-pool-size: 20 #最大链接数
-    auto-commit: true #自动提交
-    idle-timeout: 600000 #链接超时时长
-    pool-name: DataSourceHikariCP
-    max-lifetime: 1800000
-    connection-test-query: SELECT 1
-
+    hikari:
+      connection-timeout: 30000
+      minimum-idle: 5 #最小链接数
+      maximum-pool-size: 20 #最大链接数
+      auto-commit: true #自动提交
+      idle-timeout: 600000 #链接超时时长
+      pool-name: DataSourceHikariCP
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+  servlet:
+    multipart:
+      max-file-size:  512000 #最大文件上传大小
+      max-request-size: 512000 # 最大请求限制500kb
 mybatis:
   type-aliases-package: com.imooc.pojo
   mapper-locations: classpath:mapper/*.xml
