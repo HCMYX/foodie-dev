@@ -1,5 +1,10 @@
 package com.imooc.controller;
 
+import com.imooc.pojo.Orders;
+import com.imooc.service.center.MyOrdersService;
+import com.imooc.utils.IMOOCJSONResult;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.File;
 
 public class BaseController {
@@ -33,4 +38,18 @@ public class BaseController {
     public static final String REDIS_USER_INFO_EXPIRE_TIME_VALUE_KEY = "redis_user_info_expire_time_value_key";
     public static final String REDIS_USER_PASSWORD_EXPIRE_TIME_VALUE_KEY = "redis_user_password_expire_time_value_key";
     public static final String REDIS_USER_FACE_EXPIRE_TIME_VALUE_KEY = "redis_user_face_expire_time_value_key";
+    @Autowired
+    public MyOrdersService myOrdersService;
+
+    /**
+     * 用于验证用户和订单是否有关联关系，避免非法用户调用
+     * @return
+     */
+    public IMOOCJSONResult checkUserOrder(String userId, String orderId) {
+        Orders order = myOrdersService.queryMyOrder(userId, orderId);
+        if (order == null) {
+            return IMOOCJSONResult.errorMsg("订单不存在！");
+        }
+        return IMOOCJSONResult.ok(order);
+    }
 }
